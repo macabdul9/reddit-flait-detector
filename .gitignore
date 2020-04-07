@@ -132,3 +132,5 @@ dmypy.json
 # custom ignore files and directories
 venv/
 dataset/
+data/
+*.h5
