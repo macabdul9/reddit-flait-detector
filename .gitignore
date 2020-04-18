@@ -134,6 +134,25 @@ dmypy.json
 venv/
 dataset/
 data/
+Data/
 *.h5
 *.csv
 *.pkl
+*.h5
+*.hdf
+*.model
+*.pt
+*.pth
+*.zip
+*.gz
+*.tz
+logs/
+
+*.tfrecords
+
+
+
+
+
+
+# Nodejs ingore
