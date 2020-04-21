@@ -1,5 +1,8 @@
 import random
 
+
+title_font = {"fontsize":20}
+label_font = {"fontsize":16}
 def get_random_rgb():
     """
         Function to generate rangom rgb values 
