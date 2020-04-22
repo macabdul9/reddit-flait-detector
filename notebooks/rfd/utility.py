@@ -3,6 +3,7 @@ import re
 
 title_font = {"fontsize":20}
 label_font = {"fontsize":16}
+
 def get_random_rgb():
     """
         Function to generate rangom rgb values 
@@ -61,6 +62,3 @@ def month_year_iter(start_month, start_year, end_month, end_year, dfs):
     for i, ym in enumerate(range(ym_start, ym_end)):
         y, m = divmod( ym, 12)
         yield y, m+1, dfs[i]
-
-def count_regexp_occ(regexp=””, text=None):
-    return len(re.findall(regexp, text))
