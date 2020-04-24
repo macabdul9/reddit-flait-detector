@@ -49,10 +49,11 @@ def print_confusion_matrix(confusion_matrix,
 
 
 def evaluate_model(model, X, y, X_test, y_test, target_names=None):
-    scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
+
+    # scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
     scores_test = cross_val_score(model, X_test, y_test, cv=5, scoring='accuracy')
-    
-    print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std()))
+    # scores_test = model.score(X_test, y_test)
+    # print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std()))
     print("Accuracy test: %0.2f (+/- %0.2f)" % (scores_test.mean(), scores_test.std()))
     
     print("Test classification report: ")

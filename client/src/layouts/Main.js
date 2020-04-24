@@ -27,7 +27,7 @@ class Main extends Component {
 
   render() {
     return (
-      <div id="wrapper">
+      <div id="wrapper" >
         <Helmet titleTemplate="%s | RFD" defaultTitle="Abdul Waheed" />
         <Header />
         <div id="main">

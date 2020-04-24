@@ -1,10 +1,9 @@
 import re
 import string
-
 from sklearn.base import TransformerMixin
-
 import en_core_web_lg
-
+from tqdm import tqdm
+tqdm.pandas()
 nlp = en_core_web_lg.load()
 
 class TextPreprocessor(TransformerMixin):
@@ -13,7 +12,7 @@ class TextPreprocessor(TransformerMixin):
         
     def transform(self, X, *_):
         X_copy = X.copy()
-        X_copy[self.text_attribute] = X_copy[self.text_attribute].apply(self._preprocess_text)
+        X_copy[self.text_attribute] = X_copy[self.text_attribute].progress_apply(self._preprocess_text)
         return X_copy
     
     def _preprocess_text(self, text):

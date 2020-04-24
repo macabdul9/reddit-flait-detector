@@ -20,7 +20,7 @@ import './static/css/main.scss';
 
 function App() {
   return (
-    <div>
+    <div style={{"backgroundColor":"white"}}>
       <Router>
         <Switch>
           <Route exact path="/" component={Index} />

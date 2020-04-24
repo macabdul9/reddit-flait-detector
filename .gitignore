@@ -137,11 +137,16 @@ venv/
 dataset/
 data/
 Data/
+notebooks/embeddings/
 *.h5
 *.csv
 *.pkl
 *.h5
 *.hdf
+*.pb
+*.bin
+*.txt
+*.vec
 *.model
 *.pt
 *.pth

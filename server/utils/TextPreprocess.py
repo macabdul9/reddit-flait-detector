@@ -1,5 +1,4 @@
 import nltk
-from emot import EMOTICONS, EMO_UNICODE, UNICODE_EMO
 import string
 import autocorrect
 import re
@@ -7,23 +6,6 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 import emoji
 from autocorrect import Speller
-
-def correct_spellings(text):
-    corrected_text = []
-    misspelled_words = spell.unknown(text.split())
-    for word in text.split():
-        if word in misspelled_words:
-            corrected_text.append(spell.correction(word))
-        else:
-            corrected_text.append(word)
-    return " ".join(corrected_text)
-
-
-# convert emotion to words
-def convert_emoticons(text):
-    for emot in EMOTICONS:
-        text = re.sub(u'('+emot+')', "_".join(EMOTICONS[emot].replace(",","").split()), text)
-    return text 
 
 # convert emoji to words
 def convert_emojis(text):
@@ -67,8 +49,7 @@ def clean_text(text):
     # remove white spaces 
     text = re.sub(r"\s{2,}", " ", text)
 
-    # replace emoji/emoticons with words
-    text = convert_emoticons(text)
+    # replace emoji with words
     text = convert_emojis(text)
     
     # replace punctuation characters with spaces

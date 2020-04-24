@@ -7,28 +7,13 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 import emoji
 from autocorrect import Speller
-from nltk.stem import WordNetLemmatizer
-import en_core_web_lg
-
-nlp = en_core_web_lg.load()
-
-nltk.download('wordnet')
-def correct_spellings(text):
-    corrected_text = []
-    misspelled_words = spell.unknown(text.split())
-    for word in text.split():
-        if word in misspelled_words:
-            corrected_text.append(spell.correction(word))
-        else:
-            corrected_text.append(word)
-    return " ".join(corrected_text)
 
 
 # convert emotion to words
-def convert_emoticons(text):
-    for emot in EMOTICONS:
-        text = re.sub(u'('+emot+')', "_".join(EMOTICONS[emot].replace(",","").split()), text)
-    return text 
+# def convert_emoticons(text):
+#     for emot in EMOTICONS:
+#         text = re.sub(u'('+emot+')', "_".join(EMOTICONS[emot].replace(",","").split()), text)
+#     return text 
 
 # convert emoji to words
 def convert_emojis(text):
@@ -41,14 +26,6 @@ def correct_spellings(text):
     return spell.autocorrect_sentence(text)
 
 
-
-# lemmetization
-def lemmatize(text):
-        doc = nlp(text)
-        words = [x.lemma_ for x in [y for y in doc if not y.is_stop and y.pos_ != 'PUNCT' 
-                                    and y.pos_ != 'PART' and y.pos_ != 'X']]
-        return ' '.join(words)
-
 def clean_text(text):
     """
     params: 
@@ -56,8 +33,10 @@ def clean_text(text):
     returns: cleaned text
 
     """
+    if not text or len(text) < 1:
+        return " "
     STOPWORDS = stopwords.words('english')
-    custom =["http", "https", "com", "twitter", "facebook", "reddit", "google", "api", "instagram", "www", 'gmail', "yahoo", "proton"]
+    custom =["http", "https", "www", "com", "reddit", "r", "html", "php", "png", "jpg", "gif", "jpeg"]
     STOPWORDS += custom
     # convert text to lowercase
     text = text.strip().lower()
@@ -81,8 +60,8 @@ def clean_text(text):
     text = re.sub(r"\s{2,}", " ", text)
 
     # replace emoji/emoticons with words
-    text = convert_emoticons(text)
-    text = convert_emojis(text)
+    # text = convert_emoticons(text)
+    # text = convert_emojis(text)
     
     # replace punctuation characters with spaces
     filters='!"\'#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n'
@@ -92,6 +71,6 @@ def clean_text(text):
 
      
     text = ' '.join([word for word in text.split() if word not in STOPWORDS])
-    text = correct_spellings(text)
+    # text = correct_spellings(text)
 
     return text
