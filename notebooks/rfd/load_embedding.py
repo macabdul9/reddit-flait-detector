@@ -1,65 +1,29 @@
-## FUNCTIONS TAKEN FROM https://www.kaggle.com/gmhost/gru-capsule
 import numpy as np
-from params import max_features
-def load_glove(word_index, EMBEDDING_FILE='../glove.6B.100d.txt'):
-    # EMBEDDING_FILE = '../input/embeddings/glove.840B.300d/glove.840B.300d.txt'
-    def get_coefs(word,*arr): return word, np.asarray(arr, dtype='float32')[:300]
-    embeddings_index = dict(get_coefs(*o.split(" ")) for o in open(EMBEDDING_FILE))
-    
-    all_embs = np.stack(embeddings_index.values())
-    emb_mean,emb_std = -0.005838499,0.48782197
-    embed_size = all_embs.shape[1]
-
-    # word_index = tokenizer.word_index
-    nb_words = min(max_features, len(word_index))
-    embedding_matrix = np.random.normal(emb_mean, emb_std, (nb_words, embed_size))
-    for word, i in word_index.items():
-        if i >= max_features: continue
-        embedding_vector = embeddings_index.get(word)
-        #ALLmight
-        if embedding_vector is not None: 
-            embedding_matrix[i] = embedding_vector
+from tqdm import tqdm
+def load_embedding(vocabulary_size, tokenizer, embedding_size=100):
+    """
+        This function loads the pretrained embedding into a embedding matrix
+        Parameters:
+            vocabulary_size: size of the vocabulary
+            tokenizer: tokenizer object
+            embedding_size: size of the embedding vector (for 100 100d glove vector)
+        Returns: embedding matrix
+    """
+    embeddings_index = dict()
+    f = open('../embeddings/glove.6B.100d.txt', encoding='utf8')
+    for line in f:
+        values = line.split()
+        word = values[0]
+        coefs = np.asarray(values[1:], dtype='float32')
+        embeddings_index[word] = coefs
+    f.close()
+    embedding_matrix = np.zeros((vocabulary_size, embedding_size))
+    for word, index in tqdm(tokenizer.word_index.items()):
+        if index > vocabulary_size - 1:
+            break
         else:
-            embedding_vector = embeddings_index.get(word.capitalize())
-            if embedding_vector is not None: 
-                embedding_matrix[i] = embedding_vector
-    return embedding_matrix 
-    
-            
-def load_fasttext(word_index):    
-    EMBEDDING_FILE = '../input/embeddings/wiki-news-300d-1M/wiki-news-300d-1M.vec'
-    def get_coefs(word,*arr): return word, np.asarray(arr, dtype='float32')
-    embeddings_index = dict(get_coefs(*o.split(" ")) for o in open(EMBEDDING_FILE) if len(o)>100)
+            embedding_vector = embeddings_index.get(word)
+            if embedding_vector is not None:
+                embedding_matrix[index] = embedding_vector
 
-    all_embs = np.stack(embeddings_index.values())
-    emb_mean,emb_std = all_embs.mean(), all_embs.std()
-    embed_size = all_embs.shape[1]
-
-    # word_index = tokenizer.word_index
-    nb_words = min(max_features, len(word_index))
-    embedding_matrix = np.random.normal(emb_mean, emb_std, (nb_words, embed_size))
-    for word, i in word_index.items():
-        if i >= max_features: continue
-        embedding_vector = embeddings_index.get(word)
-        if embedding_vector is not None: embedding_matrix[i] = embedding_vector
-
-    return embedding_matrix
-
-def load_para(word_index):
-    EMBEDDING_FILE = '../input/embeddings/paragram_300_sl999/paragram_300_sl999.txt'
-    def get_coefs(word,*arr): return word, np.asarray(arr, dtype='float32')
-    embeddings_index = dict(get_coefs(*o.split(" ")) for o in open(EMBEDDING_FILE, encoding="utf8", errors='ignore') if len(o)>100)
-
-    all_embs = np.stack(embeddings_index.values())
-    emb_mean,emb_std = -0.0053247833,0.49346462
-    embed_size = all_embs.shape[1]
-
-    # word_index = tokenizer.word_index
-    nb_words = min(max_features, len(word_index))
-    embedding_matrix = np.random.normal(emb_mean, emb_std, (nb_words, embed_size))
-    for word, i in word_index.items():
-        if i >= max_features: continue
-        embedding_vector = embeddings_index.get(word)
-        if embedding_vector is not None: embedding_matrix[i] = embedding_vector
-    
     return embedding_matrix

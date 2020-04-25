@@ -14,6 +14,11 @@ Live Demo: www.google.com[update the url]
 - For the first three subtasks a jupyter notebook can be found in notebooks subdirectory
 - Use the scracpped dataset if you want to execute exploratory data analysis and classification notebook. Dataset www.google.com
 - Set the path in respective cell
--  
+
+|   |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
 
 
