@@ -1,15 +1,8 @@
 import flask
 from flask import Flask, session, redirect, url_for, session, jsonify, request
-import numpy as np
 import requests
-import os
-import praw
-from multiprocessing import cpu_count
 from utils.ScrapSubmission import get_data
 from inference import predict
-# import simpletransformers
-
-model_path = str(os.path.dirname(__file__)) + 'models/pytorch_model.bin'
 
 app = flask.Flask(__name__)
 
@@ -34,4 +27,4 @@ def main():
         return {"top-3 pred":"   ".join(result), "flair":flair, "text":text}
 
 if __name__ == '__main__':
-  app.run(host="0.0.0.0", port=80)
+  app.run()
