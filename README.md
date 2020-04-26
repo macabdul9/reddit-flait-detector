@@ -1,3 +1,5 @@
+# README file will be updated (currently in production)
+
 # midas-summer-internship-task
 MIDAS@IIITD summer internship task: Reddit Flair Detector
 
