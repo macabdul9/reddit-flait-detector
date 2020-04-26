@@ -42,12 +42,6 @@ class Index extends Component {
                 <h1>Reddiec Flair Detector</h1>
                 <p>Enter Submission URL(from r/India) or upload text file containing URLs to predict the flair(s)</p>
             </div>
-
-            {/* <form onSubmit={this.handleSubmit} className={classes.Form}>
-                <input type="text" value={this.state.value} onChange={this.handleChange}  placeholder='Enter Subreddit URL' style={{"borderRadius":"50px"}}/>
-                <text>Please enter a valid url</text>
-                <Button type="submit" value="Submit" className={classes.Button}>Predict</Button>
-            </form> */}
         
             <FormGroup>
                 <FormControlLabel
@@ -55,16 +49,6 @@ class Index extends Component {
                     label="Upload File"
                 />
             </FormGroup>
-
-            {/* <Form style={{'position':'absolute','flex':'1','justifyContent':'center','width':'70%'}}>
-              <Form.Group controlId="formGroupText">
-                <Form.Label>Submission URL</Form.Label>
-                <Form.Control type="text" placeholder="Enter r/india Submission URL" />
-              </Form.Group>
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form> */}
             {inputMethod}
           </Main>
         </>

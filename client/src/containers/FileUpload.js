@@ -44,7 +44,7 @@ class FileUpload extends React.Component {
 		  <Form onSubmit={this.onFormSubmit} className={classes.Form}>
         <h1>File Upload</h1>
         <input type="file" onChange={this.onChange}  />
-        <ModelSelector/>
+        {/* <ModelSelector/> */}
         <Button type="submit" className={classes.Button}>Upload</Button>
 	  	</Form>
 	  </div>
