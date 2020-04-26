@@ -29,7 +29,7 @@ class CustomForm extends Component {
     const { value } = { ...this.state };
     var data = {url:value}
     // console.log('data', data);
-    axios.post("http://localhost:5000/", data)
+    axios.post("https://midas-rfd-api.herokuapp.com/", data)
       .then((res) => {
         this.setState({submitting: false, value: "" , responseData:res.data});
         // console.log(res.data);
@@ -47,7 +47,7 @@ class CustomForm extends Component {
     // }
     let progress = null;
     if (this.state.submitting) {
-      progress = <CustomizedProgressBars />;
+      progress = <CircularProgress />;
     }
     let response = null;
     if(!this.state.error){
@@ -60,7 +60,7 @@ class CustomForm extends Component {
           </div>
         )
     }else if(this.state.error && this.hasResponseArrived){
-      response = <p>{this.state.responseData}</p>
+      response = <p>Oops, Something went wrong, check your internet connect and/or url</p>
     }
     // console.log('flair', this.state.responseData.flair);
     return (

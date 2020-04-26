@@ -40,15 +40,16 @@ class Index extends Component {
             <div style={{"textAlign":"center"}}>
                 {/* <img src={background} alt="background" className={classes.Image}/> */}
                 <h1>Reddiec Flair Detector</h1>
-                <p>Enter Submission URL(from r/India) or upload text file containing URLs to predict the flair(s)</p>
+                <p>Enter Submission URL(from r/India) or POST a text file containing URLs to predict the flair(s)</p>
+                <p><strong>Note :</strong> Due to large slug size(it slows down the api) and other reasons like api scraps the data as well, getting the flair might take upto 20sec/request</p>
             </div>
         
-            <FormGroup>
+            {/* <FormGroup>
                 <FormControlLabel
                     control={<Switch color="primary" checked={this.fileUpload} onChange={this.handleFileUpload} name="anythin" />}
                     label="Upload File"
                 />
-            </FormGroup>
+            </FormGroup> */}
             {inputMethod}
           </Main>
         </>

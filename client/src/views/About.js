@@ -11,23 +11,10 @@ class About extends Component {
     return (
       <>
         <Main>
-          <Helmet title="About" />
-          <article className="post" id="about">
-            <header>
-              <div className="title">
-                <h2><Link to="/about">About Me</Link></h2>
-                <p>(in about {this.count} words)</p>
-              </div>
-            </header>
-            <ReactMarkdown
-              source={about}
-              renderers={{
-                Link: this.LinkRenderer,
-              }}
-              escapeHtml={false}
-            />
-          </article>
-        </Main>
+          <Helmet title='Readme'/>
+          <h1>This is /about route page</h1>
+          <h1>I will update this page soon</h1>
+      </Main>
       </>
     )
   }

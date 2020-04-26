@@ -15,6 +15,7 @@ class EDA extends Component {
             <Main>
                 <Helmet title='EDA'/>
                 <h1>This is /eda route page</h1>
+                <h1>Updating soon</h1>
             </Main>
         )
     }

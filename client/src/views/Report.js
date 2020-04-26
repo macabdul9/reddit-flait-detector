@@ -7,6 +7,7 @@ const Report = () => {
   return (
     <Main>
         <Helmet title="Report" />
+        <h1>This is simple report, I will add the report soon</h1>
         <ReportRenderer/>
     </Main>
   )

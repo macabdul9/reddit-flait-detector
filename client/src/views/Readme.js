@@ -7,6 +7,7 @@ const Readme = () => {
     <Main>
         <Helmet title='Readme'/>
       <h1>This is /readme route page</h1>
+      <h1>Updating soon</h1>
     </Main>
   )
 }
