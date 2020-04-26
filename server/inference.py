@@ -1,5 +1,8 @@
 from simpletransformers.classification import ClassificationModel
 from numpy import exp, sum
+import os
+
+model_path = str(os.path.dirname(__file__)) + 'models/pytorch_model.bin'
 
 flairs = ['AskIndia', 'Business/Finance', 'Coronavirus', 'Food',
        'Non-Political', 'Photography', 'Policy/Economy', 'Politics',
@@ -22,3 +25,4 @@ def predict(text):
     confidence = softmax(raw_outputs[0])
     index = confidence.argsort()[-3:]
     return [flairs[prediction[0]], flairs[top_3[1]], flairs[top_3[0]]], [confidence[index[-1]], confidence[index[-2]], confidence[index[-3]]]
+    return flairs[prediction[0]]

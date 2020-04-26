@@ -1,11 +1,10 @@
 import praw
 import string
 import re
-import emoji
-from autocorrect import Speller
+# import emoji
 
-# create a list of stopwrods manually  it will save nltk(or similar package) import 
 
+# manually creating a list of stopwrods, it will save nltk(or similar package) import 
 STOPWORDS =  ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", 
 "you've", "you'll", "you'd", 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 
 'himself', 'she', "she's", 'her', 'hers', 'herself', 'it', "it's", 'its', 'itself', 'they', 
@@ -25,14 +24,14 @@ STOPWORDS =  ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you'
 
 
 # convert emoji to words
-def convert_emojis(text):
-    return emoji.demojize(text)
+# def convert_emojis(text):
+#     return emoji.demojize(text)
 
 
-# correct spelling
-spell = Speller()
-def correct_spellings(text):
-    return spell.autocorrect_sentence(text)
+# # correct spelling
+# spell = Speller()
+# def correct_spellings(text):
+#     return spell.autocorrect_sentence(text)
 
 
 def clean_text(text):
@@ -67,7 +66,7 @@ def clean_text(text):
     text = re.sub(r"\s{2,}", " ", text)
 
     # replace emoji with words
-    text = convert_emojis(text)
+    # text = convert_emojis(text)
     
     # replace punctuation characters with spaces
     filters='!"\'#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n'
@@ -111,12 +110,17 @@ def scrap_data(sub):
             sub: submission instance
         Returns: collected text data      
     """
-    data = " ".join([sub.title, sub.url, sub.selftext])
+    data = sub.title + sub.selftext
+
+    url = clean_text(sub.url)
+
     flair = sub.link_flair_text
+
     comments = scrap_comments(sub)
+
     # print(comments)
-    data = data + " " + comments
-    return clean_text(data), flair
+    text = " ".join([sub.title, sub.selftext, comments, clean_text(sub.url)])
+    return text, flair
     
 
 def get_data(url):
@@ -125,6 +129,10 @@ def get_data(url):
         Params
             url: url/link of a submission 
         Returns: scrapped data
+    """
+
+    """
+        If you're here please don't misuse the credentials (⌣́_⌣̀) 
     """
     api = praw.Reddit(
         client_id='pw8WCM92ySUjsQ', 
