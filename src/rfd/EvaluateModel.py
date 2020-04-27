@@ -15,18 +15,6 @@ def print_confusion_matrix(confusion_matrix,
                            xlabel='Predicted label'):
     """Prints a confusion matrix, as returned by sklearn.metrics.confusion_matrix, as a heatmap.
     
-    Arguments
-    ---------
-    confusion_matrix: numpy.ndarray
-        The numpy.ndarray object returned from a call to sklearn.metrics.confusion_matrix. 
-        Similarly constructed ndarrays can also be used.
-    class_names: list
-        An ordered list of class names, in the order they index the given confusion matrix.
-    figsize: tuple
-        A 2-long tuple, the first value determining the horizontal size of the ouputted figure,
-        the second determining the vertical size. Defaults to (10,7).
-    fontsize: int
-        Font size for axes labels. Defaults to 14.
         
     Returns
     -------
@@ -48,13 +36,10 @@ def print_confusion_matrix(confusion_matrix,
 
 
 
-def evaluate_model(model, X, y, X_test, y_test, target_names=None):
+def evaluate_model(model, X_test, y_test, target_names=None):
 
-    # scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
-    scores_test = cross_val_score(model, X_test, y_test, cv=5, scoring='accuracy')
-    # scores_test = model.score(X_test, y_test)
-    # print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std()))
-    print("Accuracy test: %0.2f (+/- %0.2f)" % (scores_test.mean(), scores_test.std()))
+    scores_test = model.score(X_test, y_test)
+    print("Accuracy test: %0.2f (+/- %0.2f)" % scores_test)
     
     print("Test classification report: ")
     if target_names is None:

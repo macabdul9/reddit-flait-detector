@@ -41,7 +41,7 @@ class Index extends Component {
                 {/* <img src={background} alt="background" className={classes.Image}/> */}
                 <h1>Reddiec Flair Detector</h1>
                 <p>Enter Submission URL(from r/India) or POST a text file containing URLs to predict the flair(s)</p>
-                <p><strong>Note :</strong> Due to large slug size(it slows down the api) and other reasons like api scraps the data as well, getting the flair might take upto 20sec/request</p>
+                <p><strong>Note :</strong> Sometimes this app may fail to get a response due to large slug size of api, data scrapping task causing api to exceed timeout limit of heroku(30s)</p>
             </div>
         
             {/* <FormGroup>

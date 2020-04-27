@@ -110,16 +110,17 @@ def scrap_data(sub):
             sub: submission instance
         Returns: collected text data      
     """
-    data = sub.title + sub.selftext
+    # data = sub.title + sub.selftext
 
-    url = clean_text(sub.url)
+    # url = clean_text(sub.url)
 
-    flair = sub.link_flair_text
+    
 
-    comments = scrap_comments(sub)
+    # comments = scrap_comments(sub)
 
     # print(comments)
-    text = " ".join([sub.title, sub.selftext, comments, clean_text(sub.url)])
+    text = " ".join([sub.title, sub.selftext, clean_text(sub.url)])
+    flair = sub.link_flair_text
     return text, flair
     
 

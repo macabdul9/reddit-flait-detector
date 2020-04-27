@@ -18,26 +18,16 @@ def urlHandler():
         return jsonify({"reponse":"please POST a valid submission url at this endpoint"})
 
     if flask.request.method == 'POST':
-
-        # try:
-        # url = request.args
-        data = request.get_json()
-        # print('url', data['url'])
-        url = data['url']
-        # print(url, type(url))
-        text, flair =  get_data(url)
-        pred, confi = predict(text)
-        result = [str(cls)+" : "+str('%.4f'%confidence) for cls, confidence in zip(pred, confi)]
-        print(result)
-        # # print(confi)
-        return jsonify({"top_3_pred":"   ".join(result), "flair":flair, "text":text})
-        # # # return jsonify({"actual":flair, "pred":pred})
-
-        # return jsonify({"url":url})
-        # return jsonify({"url":data.get('url')})
-        # except:
-        #     return jsonify({"response":"OOPs something went wrong! Check if your submission url is valid"})
-
+        
+        url = request.args['url']
+        
+        try:
+            text, flair =  get_data(url)
+            pred, confi = predict(text)
+            result = [str(cls)+" : "+str('%.4f'%confidence) for cls, confidence in zip(pred, confi)]
+            return jsonify({"top_3_pred":"   ".join(result), "flair":flair, "text":text})
+        except:
+            return jsonify({"response":"Oops something went wrong! Check your internet connection and/or url"})
 
 @app.route('/automated_testing/', methods=['GET', 'POST'])
 def fileHandler():
@@ -64,6 +54,28 @@ def fileHandler():
         # print(total)
         return jsonify({"top-1 accuracy":'%.4f'%(correct/total), "top-3 accuracy":'%.4f'%(top3_correct/total)}) 
         # return jsonify({"response":"file received"})
+
+
+@app.route('/reactRequest/', methods=['GET', 'POST'])
+def reactRequestHandler():
+    if flask.request.method == 'GET':
+        return jsonify({"reponse":"please POST a valid submission url at this endpoint"})
+
+    if flask.request.method == 'POST':
+        
+        data = request.get_json()
+        url = data['url']
+
+        # print(url) # for debuggin
+        try:
+            text, flair =  get_data(url)
+            pred, confi = predict(text)
+            result = [str(cls)+" : "+str('%.4f'%confidence) for cls, confidence in zip(pred, confi)]
+            return jsonify({"top_3_pred":"   ".join(result), "flair":flair, "text":text})
+        except:
+            return jsonify({"response":"Oops something went wrong! Check your internet connection and/or url"})
+        # return jsonify({"url":url})
+
 
 
 if __name__ == '__main__':

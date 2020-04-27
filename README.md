@@ -7,9 +7,9 @@ API Endpoints
        
    - /automated_testing/
 
-### Note: GitHub might not be able to render the notebook due to its large size hence please visit these links to see the notebooks:
-- data-acquisition.ipynb: 
+### Note: GitHub might not be able to render these notebooks due to their size, see them on nbviewer:
 - exploratory-data-analysis.ipynb: https://nbviewer.jupyter.org/github/macabdul9/midas-internship-task/blob/master/src/exploratory-data-analysis.ipynb
+  
 -   preprocessing-and-classification.ipynb: https://nbviewer.jupyter.org/github/macabdul9/midas-internship-task/blob/master/src/preprocessing-and-classification.ipynb
 - 
 
@@ -27,14 +27,14 @@ A comprehensive report of trained models can be is given in the below table:
 | :---        |    :----:   |          ---: |
 | MultinomialNB | 59       | 48535/5393   |
 | SV Classifier | 58        | 48535/5393      |
-| RandomForest | 40       | 48535/5393   |
+| RandomForest | 55       | 48535/5393   |
 | GradientBoosting | 58    | 48535/5393      |
 | Flair | 37    | 24110/3000      |
-| BiLSTM (trainable embedding layer)| 64       | 90181/10021  |
+| BiLSTM (trainable embedding layer)| 62       | 90181/10021  |
 | BiLSTM(pretrained embeddings)   | 60        | 90181/10021      |
-| CNN(pretrained embeddings)      | 59       | 90181/10021   |
+| CNN(pretrained embeddings)      | 63       | 90181/10021   |
 | Attention-based LSTM   | 61        | 90181/10021      |
-| DistilBERT      | 64       | 90334/10038   |
+| DistilBERT      | 65       | 90334/10038   |
 | XLNet   | 65        | 90334/10038      |
 
 ##### Download the trained models from here:
@@ -83,9 +83,9 @@ ii. Create a virtual environment(recommended but not necessary)
   
 iii. Install the dependencies:
 - pip install -r requirements.txt(assuming you're on the root directory of this repo)
-iv. Download the raw/cleaned/preprocessed dataset from here : www.gooogle.com(update this) and set the path according 
+iv. Download the raw/cleaned/preprocessed dataset from [see section 2.4 and 2.6]
 
-v. Now src code base can be executed
+v. Now all the src code base can be executed
 
 ## 4. To run the client app on localhost 
 i. You should have node.js and npm (package manager) installed in your machine
@@ -104,7 +104,7 @@ i. Change directory
 - cd server/
 ii. Create and activate a virtual environment (see 2.2)
 iii. Install dependencies (see 2.3)
-iv. Download the checkpoint from here and set the path according: www.google.com
+iv. Download the checkpoint from (see results) and set the path accordingly
 iv. Run the flask app
 - python app.py
 - API will be running on localhost:5000(default port)
@@ -117,9 +117,54 @@ iv. Run the flask app
 - Post Response (txt file)
 ![AutomatedTesting](assets/automated_testing.jpg)
 
+## 7. Python scripts to send POST requests to api
+
+#### i. Sending an url to / endpoint
+
+## Source: Postman
+import requests
+
+url = "http://localhost:5000/?url=https://www.reddit.com/r/india/comments/g8dx13/venomous_whisper_of_rumor_mongers_manifest/"
+
+payload = {}
+
+files = {}
+
+headers = {
+  'url': 'csds'
+}
+
+response = requests.request("POST", url, headers=headers, data = payload, files = files)
+
+print(response.text.encode('utf8'))
 
 
-## 7. Reference
+
+#### ii. Sending a text file to /automated_tesing/ endpoint
+
+
+import requests
+
+url = "http://localhost:5000/automated_testing/"
+
+payload = {}
+
+files = [
+  ('file', open('/C:/Users/abdul/OneDrive/Desktop/sample.txt','rb'))
+]
+
+headers = {
+  'url': 'csds'
+}
+
+response = requests.request("POST", url, headers=headers, data = payload, files = files)
+
+print(response.text.encode('utf8'))
+
+
+
+
+## 8. Reference
 [0] Pushshift API : https://github.com/pushshift/api
 
 [1] PRAW: https://praw.readthedocs.io/en/latest/

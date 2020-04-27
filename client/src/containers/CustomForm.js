@@ -29,7 +29,7 @@ class CustomForm extends Component {
     const { value } = { ...this.state };
     var data = {url:value}
     // console.log('data', data);
-    axios.post("https://midas-rfd-api.herokuapp.com/", data)
+    axios.post("https://midas-rfd-api.herokuapp.com/reactRequest/", data)
       .then((res) => {
         this.setState({submitting: false, value: "" , responseData:res.data});
         // console.log(res.data);
