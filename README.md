@@ -1,5 +1,3 @@
-# midas-summer-internship-task
-
 ### Client App: https://midas-rfd.web.app/
 ### API: https://midas-rfd-api.herokuapp.com/
 API Endpoints
