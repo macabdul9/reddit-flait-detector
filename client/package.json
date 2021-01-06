@@ -12,7 +12,7 @@
     "@phuocng/react-pdf-viewer": "^1.5.0",
     "@react-pdf/renderer": "^1.6.8",
     "@syncfusion/ej2-react-pdfviewer": "^18.1.43",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
